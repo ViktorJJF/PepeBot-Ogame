@@ -4,7 +4,9 @@ const moment = require("moment");
 let login = async () => {
   const puppeteer = require("puppeteer");
   (async () => {
-    const browser = await puppeteer.launch({ headless: true });
+    const browser = await puppeteer.launch({
+      args: ["--no-sandbox", "--disable-setuid-sandbox"]
+    });
     const page = await browser.newPage();
 
     const navigationPromise = page.waitForNavigation();
