@@ -1,13 +1,15 @@
 const puppeteer = require("puppeteer");
 const moment = require("moment");
+const config = require("./config.js");
 
 let login = async () => {
   // ViktorJJF -- aea
   const puppeteer = require("puppeteer");
   (async () => {
-    const browser = await puppeteer.launch({
-      args: ["--no-sandbox", "--disable-setuid-sandbox"]
-    });
+    // const browser = await puppeteer.launch({
+    //   args: ["--no-sandbox", "--disable-setuid-sandbox"]
+    // });
+    const browser = await puppeteer.launch({ headless: false });
     const page = await browser.newPage();
 
     const navigationPromise = page.waitForNavigation();
@@ -38,7 +40,7 @@ let login = async () => {
     );
     await page.type(
       "#loginTab > #loginForm > .inputWrap:nth-child(1) > div > input",
-      "victorjuanjf@gmail.com"
+      config.email
     );
 
     await page.waitForSelector(
@@ -47,7 +49,7 @@ let login = async () => {
     await page.click("#root > #content > div > div > div:nth-child(3)");
     await page.type(
       "#root > #content > div > div > div:nth-child(3)",
-      "Sed4cfv52309$"
+      config.password
     );
     await page.waitForSelector(
       "#loginTab > #loginForm > p > .button-primary > span"
@@ -104,8 +106,6 @@ let sendMessageToPlayer = async (nickname, msg, mainPage) => {
   await mainPage.click("tbody > tr > .ptb10 > #searchForm > .btn_blue");
   await mainPage.waitForSelector("tbody > .alt > .action > .tooltip > .icon");
   await mainPage.click("tbody > .alt > .action > .tooltip > .icon");
-
-  await navigationPromise;
 
   await mainPage.waitForSelector(
     "#contentWrapper > #chatContent > .content > .editor_wrap > .new_msg_textarea"
