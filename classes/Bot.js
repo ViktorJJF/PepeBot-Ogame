@@ -20,9 +20,9 @@ module.exports = class Bot {
   }
   async begin() {
     console.log("iniciando bot...");
-    this.browser = await puppeteer.launch({ headless: false });
+    this.browser = await puppeteer.launch({ headless: true });
     this.page = await this.browser.newPage();
-    this.page.on("console", consoleObj => console.log(consoleObj.text())); //enable console.log inside evaluate function
+    // this.page.on("console", consoleObj => console.log(consoleObj.text())); //enable console.log inside evaluate function
     this.navigationPromise = this.page.waitForNavigation();
 
     await this.page.goto(this.LOGIN_URL);

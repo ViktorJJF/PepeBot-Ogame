@@ -87,8 +87,6 @@ const getPlayerInfo = async nickname => {
   }
 };
 
-getPlayerInfo("GAEA");
-
 module.exports = {
   getPlayerInfo
 };
