@@ -20,7 +20,9 @@ module.exports = class Bot {
   }
   async begin() {
     console.log("iniciando bot...");
-    this.browser = await puppeteer.launch({ headless: true });
+    this.browser = await puppeteer.launch({
+      args: ["--no-sandbox", "--disable-setuid-sandbox"]
+    });
     this.page = await this.browser.newPage();
     // this.page.on("console", consoleObj => console.log(consoleObj.text())); //enable console.log inside evaluate function
     this.navigationPromise = this.page.waitForNavigation();
