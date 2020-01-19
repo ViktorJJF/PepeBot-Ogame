@@ -29,7 +29,7 @@ module.exports = class Bot {
 
     await this.page.goto(this.LOGIN_URL);
 
-    await this.page.setViewport({ width: 1920, height: 937 });
+    // await this.page.setViewport({ width: 1920, height: 937 });
     console.log("se termino el inicio");
   }
   async login(username, password) {
