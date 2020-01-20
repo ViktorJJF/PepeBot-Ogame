@@ -18,11 +18,16 @@ module.exports = class Bot {
     // this.HEADERS = [('User-agent', 'Mozilla/5.0 (Windows NT 6.2; WOW64)\
     //  AppleWebKit/537.15 (KHTML, like Gecko) Chrome/24.0.1295.0 Safari/537.15')]
   }
-  async begin() {
+  async begin(environment) {
     console.log("iniciando bot...");
-    this.browser = await puppeteer.launch({
-      args: ["--no-sandbox", "--disable-setuid-sandbox"]
-    });
+    if (environment === "dev") {
+      this.browser = await puppeteer.launch({ headless: false });
+    } else {
+      this.browser = await puppeteer.launch({
+        args: ["--no-sandbox", "--disable-setuid-sandbox"]
+      });
+    }
+
     this.page = await this.browser.newPage();
     // this.page.on("console", consoleObj => console.log(consoleObj.text())); //enable console.log inside evaluate function
     this.navigationPromise = this.page.waitForNavigation();
@@ -382,7 +387,6 @@ module.exports = class Bot {
 
   async hunter(playerInfo) {
     console.log("empezando hunter...");
-    console.log("Información del jugador: ", playerInfo);
     for (const planet of playerInfo.planets) {
       let activity = await this.checkPlanetActivity(planet.coords, planet.type);
       planet.activities.push(activity);

@@ -80,6 +80,7 @@ const getPlayerInfo = async nickname => {
     playerInfo.id = player;
     planetsCoordinates = await getPlanetsCoordinates(player);
     playerInfo.planets = JSON.parse(JSON.stringify(planetsCoordinates));
+    console.log("Información del jugador: ", playerInfo);
     return playerInfo;
   } catch (error) {
     console.log("no se encontro informacion del jugador: ", nickname);
